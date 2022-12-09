@@ -1,6 +1,7 @@
 #define UNICONE
 #include<windows.h>
 #include<string>
+#include"resource.h"
 
 LRESULT CALLBACK WindowProc(HWND, UINT, WPARAM, LPARAM );
 
@@ -15,7 +16,7 @@ int WINAPI WinMain( HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdLine, int
     winc.cbClsExtra    = 0;
     winc.cbWndExtra    = 0;
     winc.hInstance     = hInst;
-    winc.hIcon         = LoadIcon( NULL, IDI_APPLICATION );
+    winc.hIcon         = LoadIcon( hInst , MAKEINTRESOURCE( IDI_ICON ) );
     winc.hIconSm       = winc.hIcon;
     winc.hCursor       = LoadCursor( NULL, IDC_ARROW );
     winc.hbrBackground = (HBRUSH)GetStockObject( WHITE_BRUSH );

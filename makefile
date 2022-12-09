@@ -38,7 +38,7 @@ LDFLAG=-O0
 CFLAG=$(OPTIMIZE) $(CPP_VERSION) $(ICOMMAND)
 
 ## The source codes you want to compile.
-LINKAGEFILES=$(SRCDIRPATH)\main.o
+LINKAGEFILES=$(SRCDIRPATH)\main.o $(SRCDIRPATH)\resource.o
 
 ## The difinition of MinGW-static-lib.
 MINGW_STATIC_LINKAGE=-static-libgcc -static-libstdc++ -static -lpthread
@@ -48,11 +48,14 @@ MINGW_STATIC_LINKAGE=-static-libgcc -static-libstdc++ -static -lpthread
 
 ## Compilation for the target.
 $(TARGET): $(LINKAGEFILES)
-	$(CCX) $(CFLAG) -o $@ $< $(MINGW_STATIC_LINKAGE) -mwindows
+	$(CCX) $(CFLAG) -o $@ $(LINKAGEFILES) $(MINGW_STATIC_LINKAGE) -mwindows
 
 ## Compilation for sources the compiler wants.
 main.o:
 	$(CCX) -c $<
+
+$(SRCDIRPATH)\resource.o: $(SRCDIRPATH)\resource.rc
+	windres $< $@
 
 #----------------------------------------------------------#
 # Cleaning up
